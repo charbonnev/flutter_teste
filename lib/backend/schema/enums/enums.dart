@@ -19,6 +19,7 @@ enum EnumTipoOcorrencia {
   D,
   DE,
   RAE,
+  DUB
 }
 
 extension FFEnumExtensions<T extends Enum> on T {

@@ -8,10 +8,10 @@ import 'select_model.dart';
 export 'select_model.dart';
 
 class SelectWidget extends StatefulWidget {
-  const SelectWidget({Key? key}) : super(key: key);
+  const SelectWidget({super.key});
 
   @override
-  _SelectWidgetState createState() => _SelectWidgetState();
+  State<SelectWidget> createState() => _SelectWidgetState();
 }
 
 class _SelectWidgetState extends State<SelectWidget> {

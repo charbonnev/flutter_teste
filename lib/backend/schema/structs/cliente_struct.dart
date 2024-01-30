@@ -9,19 +9,17 @@ import '/flutter_flow/flutter_flow_util.dart';
 class ClienteStruct extends BaseStruct {
   ClienteStruct({
     int? id,
-    DateTime? createdAt,
     String? nome,
     String? logo,
-    Color? corPrimaria,
-    Color? corSecundaria,
-    ConsultoriaStruct? consultoria,
+    String? corPrimaria,
+    String? corSecundaria,
+    int? consultoria,
     bool? isAtivo,
     String? nomeNivel1,
     String? nomeNivel2,
     String? nomeNivel3,
     String? nomeNivel4,
   })  : _id = id,
-        _createdAt = createdAt,
         _nome = nome,
         _logo = logo,
         _corPrimaria = corPrimaria,
@@ -40,42 +38,35 @@ class ClienteStruct extends BaseStruct {
   void incrementId(int amount) => _id = id + amount;
   bool hasId() => _id != null;
 
-  // "created_at" field.
-  DateTime? _createdAt;
-  DateTime? get createdAt => _createdAt;
-  set createdAt(DateTime? val) => _createdAt = val;
-  bool hasCreatedAt() => _createdAt != null;
-
   // "nome" field.
   String? _nome;
-  String get nome => _nome ?? '';
+  String get nome => _nome ?? 'null';
   set nome(String? val) => _nome = val;
   bool hasNome() => _nome != null;
 
   // "logo" field.
   String? _logo;
-  String get logo => _logo ?? '';
+  String get logo => _logo ?? 'null';
   set logo(String? val) => _logo = val;
   bool hasLogo() => _logo != null;
 
   // "cor_primaria" field.
-  Color? _corPrimaria;
-  Color get corPrimaria => _corPrimaria ?? const Color(0xFF33A817);
-  set corPrimaria(Color? val) => _corPrimaria = val;
+  String? _corPrimaria;
+  String get corPrimaria => _corPrimaria ?? '#33A817';
+  set corPrimaria(String? val) => _corPrimaria = val;
   bool hasCorPrimaria() => _corPrimaria != null;
 
   // "cor_secundaria" field.
-  Color? _corSecundaria;
-  Color get corSecundaria => _corSecundaria ?? const Color(0xFF958DCF);
-  set corSecundaria(Color? val) => _corSecundaria = val;
+  String? _corSecundaria;
+  String get corSecundaria => _corSecundaria ?? '#958DCF';
+  set corSecundaria(String? val) => _corSecundaria = val;
   bool hasCorSecundaria() => _corSecundaria != null;
 
   // "consultoria" field.
-  ConsultoriaStruct? _consultoria;
-  ConsultoriaStruct get consultoria => _consultoria ?? ConsultoriaStruct();
-  set consultoria(ConsultoriaStruct? val) => _consultoria = val;
-  void updateConsultoria(Function(ConsultoriaStruct) updateFn) =>
-      updateFn(_consultoria ??= ConsultoriaStruct());
+  int? _consultoria;
+  int get consultoria => _consultoria ?? 0;
+  set consultoria(int? val) => _consultoria = val;
+  void incrementConsultoria(int amount) => _consultoria = consultoria + amount;
   bool hasConsultoria() => _consultoria != null;
 
   // "is_ativo" field.
@@ -110,12 +101,11 @@ class ClienteStruct extends BaseStruct {
 
   static ClienteStruct fromMap(Map<String, dynamic> data) => ClienteStruct(
         id: castToType<int>(data['id']),
-        createdAt: data['created_at'] as DateTime?,
         nome: data['nome'] as String?,
         logo: data['logo'] as String?,
-        corPrimaria: getSchemaColor(data['cor_primaria']),
-        corSecundaria: getSchemaColor(data['cor_secundaria']),
-        consultoria: ConsultoriaStruct.maybeFromMap(data['consultoria']),
+        corPrimaria: data['cor_primaria'] as String?,
+        corSecundaria: data['cor_secundaria'] as String?,
+        consultoria: castToType<int>(data['consultoria']),
         isAtivo: data['is_ativo'] as bool?,
         nomeNivel1: data['nome_nivel1'] as String?,
         nomeNivel2: data['nome_nivel2'] as String?,
@@ -124,16 +114,15 @@ class ClienteStruct extends BaseStruct {
       );
 
   static ClienteStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ClienteStruct.fromMap(data) : null;
+      data is Map ? ClienteStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,
-        'created_at': _createdAt,
         'nome': _nome,
         'logo': _logo,
         'cor_primaria': _corPrimaria,
         'cor_secundaria': _corSecundaria,
-        'consultoria': _consultoria?.toMap(),
+        'consultoria': _consultoria,
         'is_ativo': _isAtivo,
         'nome_nivel1': _nomeNivel1,
         'nome_nivel2': _nomeNivel2,
@@ -147,10 +136,6 @@ class ClienteStruct extends BaseStruct {
           _id,
           ParamType.int,
         ),
-        'created_at': serializeParam(
-          _createdAt,
-          ParamType.DateTime,
-        ),
         'nome': serializeParam(
           _nome,
           ParamType.String,
@@ -161,15 +146,15 @@ class ClienteStruct extends BaseStruct {
         ),
         'cor_primaria': serializeParam(
           _corPrimaria,
-          ParamType.Color,
+          ParamType.String,
         ),
         'cor_secundaria': serializeParam(
           _corSecundaria,
-          ParamType.Color,
+          ParamType.String,
         ),
         'consultoria': serializeParam(
           _consultoria,
-          ParamType.DataStruct,
+          ParamType.int,
         ),
         'is_ativo': serializeParam(
           _isAtivo,
@@ -200,11 +185,6 @@ class ClienteStruct extends BaseStruct {
           ParamType.int,
           false,
         ),
-        createdAt: deserializeParam(
-          data['created_at'],
-          ParamType.DateTime,
-          false,
-        ),
         nome: deserializeParam(
           data['nome'],
           ParamType.String,
@@ -217,19 +197,18 @@ class ClienteStruct extends BaseStruct {
         ),
         corPrimaria: deserializeParam(
           data['cor_primaria'],
-          ParamType.Color,
+          ParamType.String,
           false,
         ),
         corSecundaria: deserializeParam(
           data['cor_secundaria'],
-          ParamType.Color,
+          ParamType.String,
           false,
         ),
-        consultoria: deserializeStructParam(
+        consultoria: deserializeParam(
           data['consultoria'],
-          ParamType.DataStruct,
+          ParamType.int,
           false,
-          structBuilder: ConsultoriaStruct.fromSerializableMap,
         ),
         isAtivo: deserializeParam(
           data['is_ativo'],
@@ -265,7 +244,6 @@ class ClienteStruct extends BaseStruct {
   bool operator ==(Object other) {
     return other is ClienteStruct &&
         id == other.id &&
-        createdAt == other.createdAt &&
         nome == other.nome &&
         logo == other.logo &&
         corPrimaria == other.corPrimaria &&
@@ -281,7 +259,6 @@ class ClienteStruct extends BaseStruct {
   @override
   int get hashCode => const ListEquality().hash([
         id,
-        createdAt,
         nome,
         logo,
         corPrimaria,
@@ -297,12 +274,11 @@ class ClienteStruct extends BaseStruct {
 
 ClienteStruct createClienteStruct({
   int? id,
-  DateTime? createdAt,
   String? nome,
   String? logo,
-  Color? corPrimaria,
-  Color? corSecundaria,
-  ConsultoriaStruct? consultoria,
+  String? corPrimaria,
+  String? corSecundaria,
+  int? consultoria,
   bool? isAtivo,
   String? nomeNivel1,
   String? nomeNivel2,
@@ -311,12 +287,11 @@ ClienteStruct createClienteStruct({
 }) =>
     ClienteStruct(
       id: id,
-      createdAt: createdAt,
       nome: nome,
       logo: logo,
       corPrimaria: corPrimaria,
       corSecundaria: corSecundaria,
-      consultoria: consultoria ?? ConsultoriaStruct(),
+      consultoria: consultoria,
       isAtivo: isAtivo,
       nomeNivel1: nomeNivel1,
       nomeNivel2: nomeNivel2,

@@ -1,36 +1,52 @@
 import '/auth/base_auth_user_provider.dart';
 import '/auth/supabase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
+import '/flutter_flow/instant_timer.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'authenticate_solo1_model.dart';
-export 'authenticate_solo1_model.dart';
+import 'login_model.dart';
+export 'login_model.dart';
 
-class AuthenticateSolo1Widget extends StatefulWidget {
-  const AuthenticateSolo1Widget({Key? key}) : super(key: key);
+class LoginWidget extends StatefulWidget {
+  const LoginWidget({super.key});
 
   @override
-  _AuthenticateSolo1WidgetState createState() =>
-      _AuthenticateSolo1WidgetState();
+  State<LoginWidget> createState() => _LoginWidgetState();
 }
 
-class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
+class _LoginWidgetState extends State<LoginWidget>
     with TickerProviderStateMixin {
-  late AuthenticateSolo1Model _model;
+  late LoginModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AuthenticateSolo1Model());
+    _model = createModel(context, () => LoginModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.instantTimer = InstantTimer.periodic(
+        duration: Duration(milliseconds: 5000),
+        callback: (timer) async {
+          _model.checkInternetResult = await actions.checkInternet();
+          setState(() {
+            FFAppState().isOnline = _model.checkInternetResult!;
+          });
+        },
+        startImmediately: true,
+      );
+    });
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -101,14 +117,12 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
               color: Color(0x990F1113),
             ),
             child: FutureBuilder<List<UsersRow>>(
-              future: (_model.requestCompleter2 ??= Completer<List<UsersRow>>()
-                    ..complete(UsersTable().querySingleRow(
-                      queryFn: (q) => q.eq(
-                        'id',
-                        currentUserUid,
-                      ),
-                    )))
-                  .future,
+              future: UsersTable().querySingleRow(
+                queryFn: (q) => q.eq(
+                  'id',
+                  currentUserUid,
+                ),
+              ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
@@ -134,15 +148,12 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 0.0),
                       child: FutureBuilder<List<ConsultoriaRow>>(
-                        future: (_model.requestCompleter1 ??=
-                                Completer<List<ConsultoriaRow>>()
-                                  ..complete(ConsultoriaTable().querySingleRow(
-                                    queryFn: (q) => q.eq(
-                                      'id',
-                                      stackUsersRow?.consultoria,
-                                    ),
-                                  )))
-                            .future,
+                        future: ConsultoriaTable().querySingleRow(
+                          queryFn: (q) => q.eq(
+                            'id',
+                            stackUsersRow?.consultoria,
+                          ),
+                        ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
@@ -215,6 +226,9 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
                                           ),
                                         ],
                                         controller: _model.tabBarController,
+                                        onTap: (i) async {
+                                          [() async {}, () async {}][i]();
+                                        },
                                       ),
                                     ),
                                     Expanded(
@@ -529,56 +543,85 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
                                                         }
 
                                                         if (loggedIn) {
-                                                          context.pushNamedAuth(
-                                                              'HomePage',
-                                                              context.mounted);
+                                                          _model.getUserDetails =
+                                                              await SupabaseGroup
+                                                                  .getUserDetailsCall
+                                                                  .call(
+                                                            userId:
+                                                                currentUserUid,
+                                                          );
+                                                          if ((_model
+                                                                  .getUserDetails
+                                                                  ?.succeeded ??
+                                                              true)) {
+                                                            setState(() {
+                                                              FFAppState()
+                                                                      .usuarioLogado =
+                                                                  SupabaseGroup
+                                                                      .getUserDetailsCall
+                                                                      .userObj(
+                                                                (_model.getUserDetails
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              )!;
+                                                            });
 
-                                                          setState(() => _model
-                                                                  .requestCompleter2 =
-                                                              null);
-                                                          await _model
-                                                              .waitForRequestCompleted2();
-                                                          setState(() => _model
-                                                                  .requestCompleter1 =
-                                                              null);
-                                                          await _model
-                                                              .waitForRequestCompleted1();
-                                                          setState(() {
-                                                            FFAppState()
-                                                                    .consultoriaAtual =
-                                                                ConsultoriaStruct(
-                                                              id: containerConsultoriaRow
-                                                                  ?.id,
-                                                              createdAt:
-                                                                  containerConsultoriaRow
-                                                                      ?.createdAt,
-                                                              nome:
-                                                                  containerConsultoriaRow
-                                                                      ?.nome,
-                                                              logo:
-                                                                  containerConsultoriaRow
-                                                                      ?.logo,
-                                                              corPrimaria:
-                                                                  colorFromCssString(
-                                                                containerConsultoriaRow!
-                                                                    .corPrimaria!,
-                                                                defaultColor:
+                                                            context.pushNamedAuth(
+                                                                'BuscaRegistro',
+                                                                context
+                                                                    .mounted);
+                                                          } else {
+                                                            // Aviso de Erro
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Houve um erro ao salvar o usuário',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                  ),
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
                                                                     FlutterFlowTheme.of(
                                                                             context)
-                                                                        .primary,
-                                                              ),
-                                                              corSecundaria:
-                                                                  colorFromCssString(
-                                                                containerConsultoriaRow!
-                                                                    .corSecundaria!,
-                                                                defaultColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondary,
+                                                                        .warning,
                                                               ),
                                                             );
-                                                          });
+                                                          }
+                                                        } else {
+                                                          // Aviso de Erro
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                            SnackBar(
+                                                              content: Text(
+                                                                'Senha incorreta ou problema no servidor!',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                ),
+                                                              ),
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      4000),
+                                                              backgroundColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .warning,
+                                                            ),
+                                                          );
                                                         }
+
+                                                        setState(() {});
                                                       },
                                                       text: 'Login',
                                                       options: FFButtonOptions(
@@ -646,7 +689,7 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
                                                       decoration:
                                                           InputDecoration(
                                                         labelText:
-                                                            'Email Address',
+                                                            'Endereço de Email',
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -776,7 +819,7 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
                                                           .passwordVisibility,
                                                       decoration:
                                                           InputDecoration(
-                                                        labelText: 'Password',
+                                                        labelText: 'Senha',
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -927,7 +970,7 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
                                                       decoration:
                                                           InputDecoration(
                                                         labelText:
-                                                            'Confirm Password',
+                                                            'Repita a senha',
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1107,7 +1150,7 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
                                                         }
 
                                                         context.pushNamedAuth(
-                                                            'HomePage',
+                                                            'BuscaRegistro',
                                                             context.mounted);
 
                                                         await UsersTable()
@@ -1160,61 +1203,6 @@ class _AuthenticateSolo1WidgetState extends State<AuthenticateSolo1Widget>
                                                           width: 1.0,
                                                         ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                  FFButtonWidget(
-                                                    onPressed: () async {
-                                                      GoRouter.of(context)
-                                                          .prepareAuthEvent();
-                                                      await authManager
-                                                          .signOut();
-                                                      GoRouter.of(context)
-                                                          .clearRedirectLocation();
-
-                                                      context.goNamedAuth(
-                                                          'AuthenticateSolo1',
-                                                          context.mounted);
-                                                    },
-                                                    text: 'Faz logout',
-                                                    options: FFButtonOptions(
-                                                      height: 40.0,
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  24.0,
-                                                                  0.0,
-                                                                  24.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                      elevation: 3.0,
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
                                                     ),
                                                   ),
                                                 ],

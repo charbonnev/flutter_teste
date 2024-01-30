@@ -23,9 +23,12 @@ class TemaRow extends SupabaseDataRow {
   int? get consultoria => getField<int>('consultoria');
   set consultoria(int? value) => setField<int>('consultoria', value);
 
-  int? get cliente => getField<int>('cliente');
-  set cliente(int? value) => setField<int>('cliente', value);
+  int? get empreendimento => getField<int>('empreendimento');
+  set empreendimento(int? value) => setField<int>('empreendimento', value);
 
   String? get nomeTema => getField<String>('nome_tema');
   set nomeTema(String? value) => setField<String>('nome_tema', value);
+
+  bool? get isAtivo => getField<bool>('is_ativo');
+  set isAtivo(bool? value) => setField<bool>('is_ativo', value);
 }

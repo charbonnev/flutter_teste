@@ -1,4 +1,4 @@
-package com.mycompany.siacoleta
+package com.impressionne.siacoleta
 
 import io.flutter.embedding.android.FlutterActivity
 

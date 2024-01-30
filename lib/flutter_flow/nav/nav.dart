@@ -80,31 +80,41 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? HomePageWidget()
-          : AuthenticateSolo1Widget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? BuscaRegistroWidget() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? HomePageWidget()
-              : AuthenticateSolo1Widget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? BuscaRegistroWidget() : LoginWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => HomePageWidget(),
+          name: 'Login',
+          path: '/login',
+          builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'AuthenticateSolo1',
-          path: '/authenticateSolo1',
-          builder: (context, params) => AuthenticateSolo1Widget(),
+          name: 'TesteStatesLogado',
+          path: '/testeStatesLogado',
+          builder: (context, params) => TesteStatesLogadoWidget(),
         ),
         FFRoute(
-          name: 'CriaRegistro',
-          path: '/criaRegistro',
-          builder: (context, params) => CriaRegistroWidget(),
+          name: 'BuscaRegistro',
+          path: '/buscaRegistro',
+          builder: (context, params) => BuscaRegistroWidget(),
+        ),
+        FFRoute(
+          name: 'criarRegistro',
+          path: '/criarRegistro',
+          builder: (context, params) => CriarRegistroWidget(
+            registro: params.getParam('registro', ParamType.JSON),
+          ),
+        ),
+        FFRoute(
+          name: 'JsonChecker',
+          path: '/jsonChecker',
+          builder: (context, params) => JsonCheckerWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -273,7 +283,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/authenticateSolo1';
+            return '/login';
           }
           return null;
         },

@@ -6,12 +6,11 @@ import '/backend/schema/enums/enums.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class UsersStruct extends BaseStruct {
-  UsersStruct({
-    int? id,
-    DateTime? createdAt,
+class UserStruct extends BaseStruct {
+  UserStruct({
+    String? id,
     String? email,
-    ConsultoriaStruct? consultoria,
+    int? consultoria,
     String? linkBi,
     bool? isColetor,
     bool? isCliente,
@@ -20,8 +19,8 @@ class UsersStruct extends BaseStruct {
     String? fone,
     String? fotoUrl,
     bool? isAtivo,
+    String? createdAt,
   })  : _id = id,
-        _createdAt = createdAt,
         _email = email,
         _consultoria = consultoria,
         _linkBi = linkBi,
@@ -31,38 +30,31 @@ class UsersStruct extends BaseStruct {
         _nome = nome,
         _fone = fone,
         _fotoUrl = fotoUrl,
-        _isAtivo = isAtivo;
+        _isAtivo = isAtivo,
+        _createdAt = createdAt;
 
   // "id" field.
-  int? _id;
-  int get id => _id ?? 0;
-  set id(int? val) => _id = val;
-  void incrementId(int amount) => _id = id + amount;
+  String? _id;
+  String get id => _id ?? '0';
+  set id(String? val) => _id = val;
   bool hasId() => _id != null;
-
-  // "created_at" field.
-  DateTime? _createdAt;
-  DateTime? get createdAt => _createdAt;
-  set createdAt(DateTime? val) => _createdAt = val;
-  bool hasCreatedAt() => _createdAt != null;
 
   // "email" field.
   String? _email;
-  String get email => _email ?? '';
+  String get email => _email ?? '0';
   set email(String? val) => _email = val;
   bool hasEmail() => _email != null;
 
   // "consultoria" field.
-  ConsultoriaStruct? _consultoria;
-  ConsultoriaStruct get consultoria => _consultoria ?? ConsultoriaStruct();
-  set consultoria(ConsultoriaStruct? val) => _consultoria = val;
-  void updateConsultoria(Function(ConsultoriaStruct) updateFn) =>
-      updateFn(_consultoria ??= ConsultoriaStruct());
+  int? _consultoria;
+  int get consultoria => _consultoria ?? 0;
+  set consultoria(int? val) => _consultoria = val;
+  void incrementConsultoria(int amount) => _consultoria = consultoria + amount;
   bool hasConsultoria() => _consultoria != null;
 
   // "link_bi" field.
   String? _linkBi;
-  String get linkBi => _linkBi ?? '';
+  String get linkBi => _linkBi ?? '0';
   set linkBi(String? val) => _linkBi = val;
   bool hasLinkBi() => _linkBi != null;
 
@@ -108,11 +100,16 @@ class UsersStruct extends BaseStruct {
   set isAtivo(bool? val) => _isAtivo = val;
   bool hasIsAtivo() => _isAtivo != null;
 
-  static UsersStruct fromMap(Map<String, dynamic> data) => UsersStruct(
-        id: castToType<int>(data['id']),
-        createdAt: data['created_at'] as DateTime?,
+  // "created_at" field.
+  String? _createdAt;
+  String get createdAt => _createdAt ?? '';
+  set createdAt(String? val) => _createdAt = val;
+  bool hasCreatedAt() => _createdAt != null;
+
+  static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
+        id: data['id'] as String?,
         email: data['email'] as String?,
-        consultoria: ConsultoriaStruct.maybeFromMap(data['consultoria']),
+        consultoria: castToType<int>(data['consultoria']),
         linkBi: data['link_bi'] as String?,
         isColetor: data['is_coletor'] as bool?,
         isCliente: data['is_cliente'] as bool?,
@@ -121,16 +118,16 @@ class UsersStruct extends BaseStruct {
         fone: data['fone'] as String?,
         fotoUrl: data['foto_url'] as String?,
         isAtivo: data['is_ativo'] as bool?,
+        createdAt: data['created_at'] as String?,
       );
 
-  static UsersStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? UsersStruct.fromMap(data) : null;
+  static UserStruct? maybeFromMap(dynamic data) =>
+      data is Map ? UserStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,
-        'created_at': _createdAt,
         'email': _email,
-        'consultoria': _consultoria?.toMap(),
+        'consultoria': _consultoria,
         'link_bi': _linkBi,
         'is_coletor': _isColetor,
         'is_cliente': _isCliente,
@@ -139,17 +136,14 @@ class UsersStruct extends BaseStruct {
         'fone': _fone,
         'foto_url': _fotoUrl,
         'is_ativo': _isAtivo,
+        'created_at': _createdAt,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
         'id': serializeParam(
           _id,
-          ParamType.int,
-        ),
-        'created_at': serializeParam(
-          _createdAt,
-          ParamType.DateTime,
+          ParamType.String,
         ),
         'email': serializeParam(
           _email,
@@ -157,7 +151,7 @@ class UsersStruct extends BaseStruct {
         ),
         'consultoria': serializeParam(
           _consultoria,
-          ParamType.DataStruct,
+          ParamType.int,
         ),
         'link_bi': serializeParam(
           _linkBi,
@@ -191,18 +185,17 @@ class UsersStruct extends BaseStruct {
           _isAtivo,
           ParamType.bool,
         ),
+        'created_at': serializeParam(
+          _createdAt,
+          ParamType.String,
+        ),
       }.withoutNulls;
 
-  static UsersStruct fromSerializableMap(Map<String, dynamic> data) =>
-      UsersStruct(
+  static UserStruct fromSerializableMap(Map<String, dynamic> data) =>
+      UserStruct(
         id: deserializeParam(
           data['id'],
-          ParamType.int,
-          false,
-        ),
-        createdAt: deserializeParam(
-          data['created_at'],
-          ParamType.DateTime,
+          ParamType.String,
           false,
         ),
         email: deserializeParam(
@@ -210,11 +203,10 @@ class UsersStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        consultoria: deserializeStructParam(
+        consultoria: deserializeParam(
           data['consultoria'],
-          ParamType.DataStruct,
+          ParamType.int,
           false,
-          structBuilder: ConsultoriaStruct.fromSerializableMap,
         ),
         linkBi: deserializeParam(
           data['link_bi'],
@@ -256,16 +248,20 @@ class UsersStruct extends BaseStruct {
           ParamType.bool,
           false,
         ),
+        createdAt: deserializeParam(
+          data['created_at'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
-  String toString() => 'UsersStruct(${toMap()})';
+  String toString() => 'UserStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is UsersStruct &&
+    return other is UserStruct &&
         id == other.id &&
-        createdAt == other.createdAt &&
         email == other.email &&
         consultoria == other.consultoria &&
         linkBi == other.linkBi &&
@@ -275,13 +271,13 @@ class UsersStruct extends BaseStruct {
         nome == other.nome &&
         fone == other.fone &&
         fotoUrl == other.fotoUrl &&
-        isAtivo == other.isAtivo;
+        isAtivo == other.isAtivo &&
+        createdAt == other.createdAt;
   }
 
   @override
   int get hashCode => const ListEquality().hash([
         id,
-        createdAt,
         email,
         consultoria,
         linkBi,
@@ -291,15 +287,15 @@ class UsersStruct extends BaseStruct {
         nome,
         fone,
         fotoUrl,
-        isAtivo
+        isAtivo,
+        createdAt
       ]);
 }
 
-UsersStruct createUsersStruct({
-  int? id,
-  DateTime? createdAt,
+UserStruct createUserStruct({
+  String? id,
   String? email,
-  ConsultoriaStruct? consultoria,
+  int? consultoria,
   String? linkBi,
   bool? isColetor,
   bool? isCliente,
@@ -308,12 +304,12 @@ UsersStruct createUsersStruct({
   String? fone,
   String? fotoUrl,
   bool? isAtivo,
+  String? createdAt,
 }) =>
-    UsersStruct(
+    UserStruct(
       id: id,
-      createdAt: createdAt,
       email: email,
-      consultoria: consultoria ?? ConsultoriaStruct(),
+      consultoria: consultoria,
       linkBi: linkBi,
       isColetor: isColetor,
       isCliente: isCliente,
@@ -322,4 +318,5 @@ UsersStruct createUsersStruct({
       fone: fone,
       fotoUrl: fotoUrl,
       isAtivo: isAtivo,
+      createdAt: createdAt,
     );

@@ -1,18 +1,18 @@
 import '../database.dart';
 
-class NiveisTable extends SupabaseTable<NiveisRow> {
+class NivelTable extends SupabaseTable<NivelRow> {
   @override
-  String get tableName => 'niveis';
+  String get tableName => 'nivel';
 
   @override
-  NiveisRow createRow(Map<String, dynamic> data) => NiveisRow(data);
+  NivelRow createRow(Map<String, dynamic> data) => NivelRow(data);
 }
 
-class NiveisRow extends SupabaseDataRow {
-  NiveisRow(Map<String, dynamic> data) : super(data);
+class NivelRow extends SupabaseDataRow {
+  NivelRow(Map<String, dynamic> data) : super(data);
 
   @override
-  SupabaseTable get table => NiveisTable();
+  SupabaseTable get table => NivelTable();
 
   int get id => getField<int>('id')!;
   set id(int value) => setField<int>('id', value);
@@ -20,8 +20,8 @@ class NiveisRow extends SupabaseDataRow {
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
 
-  int get cliente => getField<int>('cliente')!;
-  set cliente(int value) => setField<int>('cliente', value);
+  int get empreendimento => getField<int>('empreendimento')!;
+  set empreendimento(int value) => setField<int>('empreendimento', value);
 
   int get numeroNivel => getField<int>('numero_nivel')!;
   set numeroNivel(int value) => setField<int>('numero_nivel', value);
@@ -41,4 +41,17 @@ class NiveisRow extends SupabaseDataRow {
 
   int? get consultoria => getField<int>('consultoria');
   set consultoria(int? value) => setField<int>('consultoria', value);
+
+  bool? get isDeletable => getField<bool>('is_deletable');
+  set isDeletable(bool? value) => setField<bool>('is_deletable', value);
+
+  String? get shapeFile => getField<String>('shape_file');
+  set shapeFile(String? value) => setField<String>('shape_file', value);
+
+  bool? get isRecordContainer => getField<bool>('is_record_container');
+  set isRecordContainer(bool? value) =>
+      setField<bool>('is_record_container', value);
+
+  bool? get isAtivo => getField<bool>('is_ativo');
+  set isAtivo(bool? value) => setField<bool>('is_ativo', value);
 }

@@ -1,5 +1,9 @@
 // Export pages
-export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
-export '/pages/authenticate_solo1/authenticate_solo1_widget.dart'
-    show AuthenticateSolo1Widget;
-export '/pages/cria_registro/cria_registro_widget.dart' show CriaRegistroWidget;
+export '/pages/login/login_widget.dart' show LoginWidget;
+export '/pages/teste_states_logado/teste_states_logado_widget.dart'
+    show TesteStatesLogadoWidget;
+export '/pages/busca_registro/busca_registro_widget.dart'
+    show BuscaRegistroWidget;
+export '/pages/criar_registro/criar_registro_widget.dart'
+    show CriarRegistroWidget;
+export '/pages/json_checker/json_checker_widget.dart' show JsonCheckerWidget;

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "984471953116",
+    "project_id": "ffsia-22897",
+    "storage_bucket": "ffsia-22897.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984471953116:android:e0136122cb2ce6a1cf5e19",
+        "android_client_info": {
+          "package_name": "com.impressionne.siacoleta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ6r7VUF2uz1gzR0iptr_dzpO_w9ZafJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984471953116:android:4ce9a49ef4ae892ccf5e19",
+        "android_client_info": {
+          "package_name": "com.mycompany.siaadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ6r7VUF2uz1gzR0iptr_dzpO_w9ZafJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

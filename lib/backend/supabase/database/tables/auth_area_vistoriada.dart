@@ -33,6 +33,6 @@ class AuthAreaVistoriadaRow extends SupabaseDataRow {
   int? get consultoria => getField<int>('consultoria');
   set consultoria(int? value) => setField<int>('consultoria', value);
 
-  int? get cliente => getField<int>('cliente');
-  set cliente(int? value) => setField<int>('cliente', value);
+  int? get empreendimento => getField<int>('empreendimento');
+  set empreendimento(int? value) => setField<int>('empreendimento', value);
 }

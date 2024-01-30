@@ -223,24 +223,34 @@ dynamic deserializeParam<T>(
             return ConsultoriaRow(data);
           case ResponsavelAcaoRow:
             return ResponsavelAcaoRow(data);
+          case ClienteViewRow:
+            return ClienteViewRow(data);
           case CondicaoClimaRow:
             return CondicaoClimaRow(data);
+          case UsersNivelPermissaoRow:
+            return UsersNivelPermissaoRow(data);
           case TipoOcorrenciaRow:
             return TipoOcorrenciaRow(data);
           case RegistroRow:
             return RegistroRow(data);
           case ClienteRow:
             return ClienteRow(data);
+          case NivelViewRow:
+            return NivelViewRow(data);
+          case NivelRow:
+            return NivelRow(data);
           case MidiaRow:
             return MidiaRow(data);
           case ProgramaRow:
             return ProgramaRow(data);
+          case RegistrosViewRow:
+            return RegistrosViewRow(data);
           case StatusAcaoRow:
             return StatusAcaoRow(data);
+          case EmpreendimentoRow:
+            return EmpreendimentoRow(data);
           case TemaRow:
             return TemaRow(data);
-          case NiveisRow:
-            return NiveisRow(data);
           case UsersRow:
             return UsersRow(data);
           case AuthAreaVistoriadaRow:
@@ -249,6 +259,8 @@ dynamic deserializeParam<T>(
             return RegistroMetaRow(data);
           case AreaVistoriadaRow:
             return AreaVistoriadaRow(data);
+          case RegistrosViewCopiaRow:
+            return RegistrosViewCopiaRow(data);
           default:
             return null;
         }

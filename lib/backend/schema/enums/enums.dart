@@ -11,6 +11,9 @@ enum DiasDaSemana {
 }
 
 enum EnumTipoOcorrencia {
+  C,
+  NC,
+  NCE,
   OE,
   OEE,
   OM,
@@ -19,7 +22,25 @@ enum EnumTipoOcorrencia {
   D,
   DE,
   RAE,
-  DUB
+}
+
+enum EnumStatusAcao {
+  Pendente,
+  EmAndamento,
+  Concluido,
+  NaoIniciado,
+}
+
+enum EnumTipoMidia {
+  Foto,
+  Video,
+}
+
+enum EnumCondicaoClima {
+  Aberto,
+  Nublado,
+  ChuvaLeve,
+  ChuvaIntensa,
 }
 
 extension FFEnumExtensions<T extends Enum> on T {
@@ -37,6 +58,12 @@ T? deserializeEnum<T>(String? value) {
       return DiasDaSemana.values.deserialize(value) as T?;
     case (EnumTipoOcorrencia):
       return EnumTipoOcorrencia.values.deserialize(value) as T?;
+    case (EnumStatusAcao):
+      return EnumStatusAcao.values.deserialize(value) as T?;
+    case (EnumTipoMidia):
+      return EnumTipoMidia.values.deserialize(value) as T?;
+    case (EnumCondicaoClima):
+      return EnumCondicaoClima.values.deserialize(value) as T?;
     default:
       return null;
   }

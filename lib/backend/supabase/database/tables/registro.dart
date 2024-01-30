@@ -23,12 +23,6 @@ class RegistroRow extends SupabaseDataRow {
   DateTime? get updatedAt => getField<DateTime>('updated_at');
   set updatedAt(DateTime? value) => setField<DateTime>('updated_at', value);
 
-  int? get createdBy => getField<int>('created_by');
-  set createdBy(int? value) => setField<int>('created_by', value);
-
-  int? get updatedBy => getField<int>('updated_by');
-  set updatedBy(int? value) => setField<int>('updated_by', value);
-
   double? get latitude => getField<double>('latitude');
   set latitude(double? value) => setField<double>('latitude', value);
 
@@ -43,15 +37,6 @@ class RegistroRow extends SupabaseDataRow {
 
   String? get riaN => getField<String>('ria_n');
   set riaN(String? value) => setField<String>('ria_n', value);
-
-  int? get noiteAnterior => getField<int>('noite_anterior');
-  set noiteAnterior(int? value) => setField<int>('noite_anterior', value);
-
-  int? get manha => getField<int>('manha');
-  set manha(int? value) => setField<int>('manha', value);
-
-  int? get tarde => getField<int>('tarde');
-  set tarde(int? value) => setField<int>('tarde', value);
 
   bool? get demandaComunidade => getField<bool>('demanda_comunidade');
   set demandaComunidade(bool? value) =>
@@ -99,9 +84,59 @@ class RegistroRow extends SupabaseDataRow {
   int? get programa => getField<int>('programa');
   set programa(int? value) => setField<int>('programa', value);
 
-  int? get cliente => getField<int>('cliente');
-  set cliente(int? value) => setField<int>('cliente', value);
+  int? get empreendimento => getField<int>('empreendimento');
+  set empreendimento(int? value) => setField<int>('empreendimento', value);
 
   String? get responsavel => getField<String>('responsavel');
   set responsavel(String? value) => setField<String>('responsavel', value);
+
+  String? get noiteAnterior => getField<String>('noite_anterior');
+  set noiteAnterior(String? value) => setField<String>('noite_anterior', value);
+
+  String? get manha => getField<String>('manha');
+  set manha(String? value) => setField<String>('manha', value);
+
+  String? get tarde => getField<String>('tarde');
+  set tarde(String? value) => setField<String>('tarde', value);
+
+  int? get responsavelAcao => getField<int>('responsavel_acao');
+  set responsavelAcao(int? value) => setField<int>('responsavel_acao', value);
+
+  int? get nivel => getField<int>('nivel');
+  set nivel(int? value) => setField<int>('nivel', value);
+
+  String? get createdBy => getField<String>('created_by');
+  set createdBy(String? value) => setField<String>('created_by', value);
+
+  String? get updatedBy => getField<String>('updated_by');
+  set updatedBy(String? value) => setField<String>('updated_by', value);
+
+  int? get tema => getField<int>('tema');
+  set tema(int? value) => setField<int>('tema', value);
+
+  int? get areaVistoriada => getField<int>('area_vistoriada');
+  set areaVistoriada(int? value) => setField<int>('area_vistoriada', value);
+
+  int? get riaCliente => getField<int>('ria_cliente');
+  set riaCliente(int? value) => setField<int>('ria_cliente', value);
+
+  int? get riaNivel1 => getField<int>('ria_nivel1');
+  set riaNivel1(int? value) => setField<int>('ria_nivel1', value);
+
+  int? get riaNivel2 => getField<int>('ria_nivel2');
+  set riaNivel2(int? value) => setField<int>('ria_nivel2', value);
+
+  int? get riaNivel3 => getField<int>('ria_nivel3');
+  set riaNivel3(int? value) => setField<int>('ria_nivel3', value);
+
+  int? get riaNivel4 => getField<int>('ria_nivel4');
+  set riaNivel4(int? value) => setField<int>('ria_nivel4', value);
+
+  List<String> get fotoRegistro => getListField<String>('foto_registro');
+  set fotoRegistro(List<String>? value) =>
+      setListField<String>('foto_registro', value);
+
+  List<String> get videoRegistro => getListField<String>('video_registro');
+  set videoRegistro(List<String>? value) =>
+      setListField<String>('video_registro', value);
 }

@@ -21,8 +21,8 @@ class TipoOcorrenciaRow extends SupabaseDataRow {
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
 
-  int? get empresa => getField<int>('empresa');
-  set empresa(int? value) => setField<int>('empresa', value);
+  int? get consultoria => getField<int>('consultoria');
+  set consultoria(int? value) => setField<int>('consultoria', value);
 
   String? get nomeTipoOcorrencia => getField<String>('nome_tipo_ocorrencia');
   set nomeTipoOcorrencia(String? value) =>
@@ -34,4 +34,13 @@ class TipoOcorrenciaRow extends SupabaseDataRow {
   String? get enumTipoOcorrencia => getField<String>('enum_tipo_ocorrencia');
   set enumTipoOcorrencia(String? value) =>
       setField<String>('enum_tipo_ocorrencia', value);
+
+  bool get isAvailable => getField<bool>('is_available')!;
+  set isAvailable(bool value) => setField<bool>('is_available', value);
+
+  bool? get isAtivo => getField<bool>('is_ativo');
+  set isAtivo(bool? value) => setField<bool>('is_ativo', value);
+
+  int? get empreendimento => getField<int>('empreendimento');
+  set empreendimento(int? value) => setField<int>('empreendimento', value);
 }

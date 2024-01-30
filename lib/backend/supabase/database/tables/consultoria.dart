@@ -31,4 +31,7 @@ class ConsultoriaRow extends SupabaseDataRow {
 
   String? get corSecundaria => getField<String>('cor_secundaria');
   set corSecundaria(String? value) => setField<String>('cor_secundaria', value);
+
+  bool? get isAtivo => getField<bool>('is_ativo');
+  set isAtivo(bool? value) => setField<bool>('is_ativo', value);
 }

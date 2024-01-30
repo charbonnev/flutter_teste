@@ -27,4 +27,10 @@ class ResponsavelAcaoRow extends SupabaseDataRow {
   String? get nomeResponsavel => getField<String>('nome_responsavel');
   set nomeResponsavel(String? value) =>
       setField<String>('nome_responsavel', value);
+
+  int? get empreendimento => getField<int>('empreendimento');
+  set empreendimento(int? value) => setField<int>('empreendimento', value);
+
+  bool? get isAtivo => getField<bool>('is_ativo');
+  set isAtivo(bool? value) => setField<bool>('is_ativo', value);
 }

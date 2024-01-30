@@ -30,4 +30,13 @@ class StatusAcaoRow extends SupabaseDataRow {
   String? get enumStatusAcao => getField<String>('enum_status_acao');
   set enumStatusAcao(String? value) =>
       setField<String>('enum_status_acao', value);
+
+  DateTime? get isAtivo => getField<DateTime>('is_ativo');
+  set isAtivo(DateTime? value) => setField<DateTime>('is_ativo', value);
+
+  bool? get isAvailable => getField<bool>('is_available');
+  set isAvailable(bool? value) => setField<bool>('is_available', value);
+
+  int? get empreendimento => getField<int>('empreendimento');
+  set empreendimento(int? value) => setField<int>('empreendimento', value);
 }

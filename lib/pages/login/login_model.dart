@@ -1,21 +1,27 @@
 import '/auth/base_auth_user_provider.dart';
 import '/auth/supabase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'authenticate_solo1_widget.dart' show AuthenticateSolo1Widget;
-import 'dart:async';
+import '/flutter_flow/instant_timer.dart';
+import '/custom_code/actions/index.dart' as actions;
+import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AuthenticateSolo1Model extends FlutterFlowModel<AuthenticateSolo1Widget> {
+class LoginModel extends FlutterFlowModel<LoginWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  InstantTimer? instantTimer;
+  // Stores action output result for [Custom Action - checkInternet] action in Login widget.
+  bool? checkInternetResult;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -30,8 +36,8 @@ class AuthenticateSolo1Model extends FlutterFlowModel<AuthenticateSolo1Widget> {
   TextEditingController? passwordLoginController;
   late bool passwordLoginVisibility;
   String? Function(BuildContext, String?)? passwordLoginControllerValidator;
-  Completer<List<UsersRow>>? requestCompleter2;
-  Completer<List<ConsultoriaRow>>? requestCompleter1;
+  // Stores action output result for [Backend Call - API (Get User Details)] action in Button-Login widget.
+  ApiCallResponse? getUserDetails;
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode;
   TextEditingController? emailAddressController;
@@ -57,6 +63,7 @@ class AuthenticateSolo1Model extends FlutterFlowModel<AuthenticateSolo1Widget> {
 
   void dispose() {
     unfocusNode.dispose();
+    instantTimer?.cancel();
     tabBarController?.dispose();
     emailAddressLoginFocusNode?.dispose();
     emailAddressLoginController?.dispose();
@@ -76,35 +83,12 @@ class AuthenticateSolo1Model extends FlutterFlowModel<AuthenticateSolo1Widget> {
 
   /// Action blocks are added here.
 
+  Future updateAppStates(
+    BuildContext context, {
+    int? clienteSelecionado,
+  }) async {
+    await actions.checkInternet();
+  }
+
   /// Additional helper methods are added here.
-
-  Future waitForRequestCompleted2({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = requestCompleter2?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
-
-  Future waitForRequestCompleted1({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = requestCompleter1?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
 }

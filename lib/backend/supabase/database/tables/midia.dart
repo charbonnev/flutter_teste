@@ -20,15 +20,6 @@ class MidiaRow extends SupabaseDataRow {
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
 
-  int? get consultoria => getField<int>('consultoria');
-  set consultoria(int? value) => setField<int>('consultoria', value);
-
-  int? get cliente => getField<int>('cliente');
-  set cliente(int? value) => setField<int>('cliente', value);
-
-  int? get areaVistoriada => getField<int>('area_vistoriada');
-  set areaVistoriada(int? value) => setField<int>('area_vistoriada', value);
-
   String? get urlMidia => getField<String>('url_midia');
   set urlMidia(String? value) => setField<String>('url_midia', value);
 
@@ -41,4 +32,7 @@ class MidiaRow extends SupabaseDataRow {
   String? get enumTipoMidia => getField<String>('enum_tipo_midia');
   set enumTipoMidia(String? value) =>
       setField<String>('enum_tipo_midia', value);
+
+  int? get registro => getField<int>('registro');
+  set registro(int? value) => setField<int>('registro', value);
 }

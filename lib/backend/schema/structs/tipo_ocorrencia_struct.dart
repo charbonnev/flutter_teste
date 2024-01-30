@@ -9,17 +9,17 @@ import '/flutter_flow/flutter_flow_util.dart';
 class TipoOcorrenciaStruct extends BaseStruct {
   TipoOcorrenciaStruct({
     int? id,
-    DateTime? createdAt,
-    ConsultoriaStruct? consultoria,
-    int? idConsultoria,
+    String? createdAt,
+    int? consultoria,
     String? nomeTipoOcorrencia,
-    Color? cor,
+    String? cor,
+    EnumTipoOcorrencia? enumTipoOcorrencia,
   })  : _id = id,
         _createdAt = createdAt,
         _consultoria = consultoria,
-        _idConsultoria = idConsultoria,
         _nomeTipoOcorrencia = nomeTipoOcorrencia,
-        _cor = cor;
+        _cor = cor,
+        _enumTipoOcorrencia = enumTipoOcorrencia;
 
   // "id" field.
   int? _id;
@@ -29,59 +29,59 @@ class TipoOcorrenciaStruct extends BaseStruct {
   bool hasId() => _id != null;
 
   // "created_at" field.
-  DateTime? _createdAt;
-  DateTime? get createdAt => _createdAt;
-  set createdAt(DateTime? val) => _createdAt = val;
+  String? _createdAt;
+  String get createdAt => _createdAt ?? '0';
+  set createdAt(String? val) => _createdAt = val;
   bool hasCreatedAt() => _createdAt != null;
 
   // "consultoria" field.
-  ConsultoriaStruct? _consultoria;
-  ConsultoriaStruct get consultoria => _consultoria ?? ConsultoriaStruct();
-  set consultoria(ConsultoriaStruct? val) => _consultoria = val;
-  void updateConsultoria(Function(ConsultoriaStruct) updateFn) =>
-      updateFn(_consultoria ??= ConsultoriaStruct());
+  int? _consultoria;
+  int get consultoria => _consultoria ?? 0;
+  set consultoria(int? val) => _consultoria = val;
+  void incrementConsultoria(int amount) => _consultoria = consultoria + amount;
   bool hasConsultoria() => _consultoria != null;
-
-  // "id_consultoria" field.
-  int? _idConsultoria;
-  int get idConsultoria => _idConsultoria ?? 0;
-  set idConsultoria(int? val) => _idConsultoria = val;
-  void incrementIdConsultoria(int amount) =>
-      _idConsultoria = idConsultoria + amount;
-  bool hasIdConsultoria() => _idConsultoria != null;
 
   // "nome_tipo_ocorrencia" field.
   String? _nomeTipoOcorrencia;
-  String get nomeTipoOcorrencia => _nomeTipoOcorrencia ?? '';
+  String get nomeTipoOcorrencia => _nomeTipoOcorrencia ?? '0';
   set nomeTipoOcorrencia(String? val) => _nomeTipoOcorrencia = val;
   bool hasNomeTipoOcorrencia() => _nomeTipoOcorrencia != null;
 
   // "cor" field.
-  Color? _cor;
-  Color? get cor => _cor;
-  set cor(Color? val) => _cor = val;
+  String? _cor;
+  String get cor => _cor ?? '0';
+  set cor(String? val) => _cor = val;
   bool hasCor() => _cor != null;
+
+  // "enum_tipo_ocorrencia" field.
+  EnumTipoOcorrencia? _enumTipoOcorrencia;
+  EnumTipoOcorrencia get enumTipoOcorrencia =>
+      _enumTipoOcorrencia ?? EnumTipoOcorrencia.C;
+  set enumTipoOcorrencia(EnumTipoOcorrencia? val) => _enumTipoOcorrencia = val;
+  bool hasEnumTipoOcorrencia() => _enumTipoOcorrencia != null;
 
   static TipoOcorrenciaStruct fromMap(Map<String, dynamic> data) =>
       TipoOcorrenciaStruct(
         id: castToType<int>(data['id']),
-        createdAt: data['created_at'] as DateTime?,
-        consultoria: ConsultoriaStruct.maybeFromMap(data['consultoria']),
-        idConsultoria: castToType<int>(data['id_consultoria']),
+        createdAt: data['created_at'] as String?,
+        consultoria: castToType<int>(data['consultoria']),
         nomeTipoOcorrencia: data['nome_tipo_ocorrencia'] as String?,
-        cor: getSchemaColor(data['cor']),
+        cor: data['cor'] as String?,
+        enumTipoOcorrencia:
+            deserializeEnum<EnumTipoOcorrencia>(data['enum_tipo_ocorrencia']),
       );
 
-  static TipoOcorrenciaStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? TipoOcorrenciaStruct.fromMap(data) : null;
+  static TipoOcorrenciaStruct? maybeFromMap(dynamic data) => data is Map
+      ? TipoOcorrenciaStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,
         'created_at': _createdAt,
-        'consultoria': _consultoria?.toMap(),
-        'id_consultoria': _idConsultoria,
+        'consultoria': _consultoria,
         'nome_tipo_ocorrencia': _nomeTipoOcorrencia,
         'cor': _cor,
+        'enum_tipo_ocorrencia': _enumTipoOcorrencia?.serialize(),
       }.withoutNulls;
 
   @override
@@ -92,14 +92,10 @@ class TipoOcorrenciaStruct extends BaseStruct {
         ),
         'created_at': serializeParam(
           _createdAt,
-          ParamType.DateTime,
+          ParamType.String,
         ),
         'consultoria': serializeParam(
           _consultoria,
-          ParamType.DataStruct,
-        ),
-        'id_consultoria': serializeParam(
-          _idConsultoria,
           ParamType.int,
         ),
         'nome_tipo_ocorrencia': serializeParam(
@@ -108,7 +104,11 @@ class TipoOcorrenciaStruct extends BaseStruct {
         ),
         'cor': serializeParam(
           _cor,
-          ParamType.Color,
+          ParamType.String,
+        ),
+        'enum_tipo_ocorrencia': serializeParam(
+          _enumTipoOcorrencia,
+          ParamType.Enum,
         ),
       }.withoutNulls;
 
@@ -121,17 +121,11 @@ class TipoOcorrenciaStruct extends BaseStruct {
         ),
         createdAt: deserializeParam(
           data['created_at'],
-          ParamType.DateTime,
+          ParamType.String,
           false,
         ),
-        consultoria: deserializeStructParam(
+        consultoria: deserializeParam(
           data['consultoria'],
-          ParamType.DataStruct,
-          false,
-          structBuilder: ConsultoriaStruct.fromSerializableMap,
-        ),
-        idConsultoria: deserializeParam(
-          data['id_consultoria'],
           ParamType.int,
           false,
         ),
@@ -142,7 +136,12 @@ class TipoOcorrenciaStruct extends BaseStruct {
         ),
         cor: deserializeParam(
           data['cor'],
-          ParamType.Color,
+          ParamType.String,
+          false,
+        ),
+        enumTipoOcorrencia: deserializeParam<EnumTipoOcorrencia>(
+          data['enum_tipo_ocorrencia'],
+          ParamType.Enum,
           false,
         ),
       );
@@ -156,29 +155,35 @@ class TipoOcorrenciaStruct extends BaseStruct {
         id == other.id &&
         createdAt == other.createdAt &&
         consultoria == other.consultoria &&
-        idConsultoria == other.idConsultoria &&
         nomeTipoOcorrencia == other.nomeTipoOcorrencia &&
-        cor == other.cor;
+        cor == other.cor &&
+        enumTipoOcorrencia == other.enumTipoOcorrencia;
   }
 
   @override
-  int get hashCode => const ListEquality().hash(
-      [id, createdAt, consultoria, idConsultoria, nomeTipoOcorrencia, cor]);
+  int get hashCode => const ListEquality().hash([
+        id,
+        createdAt,
+        consultoria,
+        nomeTipoOcorrencia,
+        cor,
+        enumTipoOcorrencia
+      ]);
 }
 
 TipoOcorrenciaStruct createTipoOcorrenciaStruct({
   int? id,
-  DateTime? createdAt,
-  ConsultoriaStruct? consultoria,
-  int? idConsultoria,
+  String? createdAt,
+  int? consultoria,
   String? nomeTipoOcorrencia,
-  Color? cor,
+  String? cor,
+  EnumTipoOcorrencia? enumTipoOcorrencia,
 }) =>
     TipoOcorrenciaStruct(
       id: id,
       createdAt: createdAt,
-      consultoria: consultoria ?? ConsultoriaStruct(),
-      idConsultoria: idConsultoria,
+      consultoria: consultoria,
       nomeTipoOcorrencia: nomeTipoOcorrencia,
       cor: cor,
+      enumTipoOcorrencia: enumTipoOcorrencia,
     );

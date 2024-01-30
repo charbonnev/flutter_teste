@@ -24,10 +24,16 @@ class AreaVistoriadaRow extends SupabaseDataRow {
   int? get consultoria => getField<int>('consultoria');
   set consultoria(int? value) => setField<int>('consultoria', value);
 
-  int? get cliente => getField<int>('cliente');
-  set cliente(int? value) => setField<int>('cliente', value);
+  int? get empreendimento => getField<int>('empreendimento');
+  set empreendimento(int? value) => setField<int>('empreendimento', value);
 
   String? get nomeAreaVistoriada => getField<String>('nome_area_vistoriada');
   set nomeAreaVistoriada(String? value) =>
       setField<String>('nome_area_vistoriada', value);
+
+  bool? get isAtivo => getField<bool>('is_ativo');
+  set isAtivo(bool? value) => setField<bool>('is_ativo', value);
+
+  bool? get isAvailable => getField<bool>('is_available');
+  set isAvailable(bool? value) => setField<bool>('is_available', value);
 }

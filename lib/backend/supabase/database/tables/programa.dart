@@ -23,9 +23,12 @@ class ProgramaRow extends SupabaseDataRow {
   int? get consultoria => getField<int>('consultoria');
   set consultoria(int? value) => setField<int>('consultoria', value);
 
-  int? get cliente => getField<int>('cliente');
-  set cliente(int? value) => setField<int>('cliente', value);
+  int? get empreendimento => getField<int>('empreendimento');
+  set empreendimento(int? value) => setField<int>('empreendimento', value);
 
   String? get nomePrograma => getField<String>('nome_programa');
   set nomePrograma(String? value) => setField<String>('nome_programa', value);
+
+  bool? get isAtivo => getField<bool>('is_ativo');
+  set isAtivo(bool? value) => setField<bool>('is_ativo', value);
 }

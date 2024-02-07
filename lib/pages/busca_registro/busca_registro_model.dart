@@ -1,7 +1,7 @@
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/coleta_dropdown_widget.dart';
 import '/components/consulta_registros_widget.dart';
+import '/filtro/dropdown_filtro_coleta/dropdown_filtro_coleta_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -30,42 +30,49 @@ class BuscaRegistroModel extends FlutterFlowModel<BuscaRegistroWidget> {
   // State field(s) for ChoiceChips widget.
   List<String>? choiceChipsValues;
   FormFieldController<List<String>>? choiceChipsValueController;
-  // Model for coletaDropdown component.
-  late ColetaDropdownModel coletaDropdownModel1;
-  // Model for coletaDropdown component.
-  late ColetaDropdownModel coletaDropdownModel2;
-  // Model for coletaDropdown component.
-  late ColetaDropdownModel coletaDropdownModel3;
-  // Model for coletaDropdown component.
-  late ColetaDropdownModel coletaDropdownModel4;
-  // Model for coletaDropdown component.
-  late ColetaDropdownModel coletaDropdownModel5;
-  // Model for coletaDropdown component.
-  late ColetaDropdownModel coletaDropdownModel6;
-  // Model for coletaDropdown component.
-  late ColetaDropdownModel coletaDropdownModel7;
+  // Model for DropdownFiltroColeta component.
+  late DropdownFiltroColetaModel dropdownFiltroColetaModel1;
+  // Model for DropdownFiltroColeta component.
+  late DropdownFiltroColetaModel dropdownFiltroColetaModel2;
+  // Model for DropdownFiltroColeta component.
+  late DropdownFiltroColetaModel dropdownFiltroColetaModel3;
+  // Model for DropdownFiltroColeta component.
+  late DropdownFiltroColetaModel dropdownFiltroColetaModel4;
+  // Model for DropdownFiltroColeta component.
+  late DropdownFiltroColetaModel dropdownFiltroColetaModel5;
+  // Model for DropdownFiltroColeta component.
+  late DropdownFiltroColetaModel dropdownFiltroColetaModel6;
+  // Model for DropdownFiltroColeta component.
+  late DropdownFiltroColetaModel dropdownFiltroColetaModel7;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    coletaDropdownModel1 = createModel(context, () => ColetaDropdownModel());
-    coletaDropdownModel2 = createModel(context, () => ColetaDropdownModel());
-    coletaDropdownModel3 = createModel(context, () => ColetaDropdownModel());
-    coletaDropdownModel4 = createModel(context, () => ColetaDropdownModel());
-    coletaDropdownModel5 = createModel(context, () => ColetaDropdownModel());
-    coletaDropdownModel6 = createModel(context, () => ColetaDropdownModel());
-    coletaDropdownModel7 = createModel(context, () => ColetaDropdownModel());
+    dropdownFiltroColetaModel1 =
+        createModel(context, () => DropdownFiltroColetaModel());
+    dropdownFiltroColetaModel2 =
+        createModel(context, () => DropdownFiltroColetaModel());
+    dropdownFiltroColetaModel3 =
+        createModel(context, () => DropdownFiltroColetaModel());
+    dropdownFiltroColetaModel4 =
+        createModel(context, () => DropdownFiltroColetaModel());
+    dropdownFiltroColetaModel5 =
+        createModel(context, () => DropdownFiltroColetaModel());
+    dropdownFiltroColetaModel6 =
+        createModel(context, () => DropdownFiltroColetaModel());
+    dropdownFiltroColetaModel7 =
+        createModel(context, () => DropdownFiltroColetaModel());
   }
 
   void dispose() {
     unfocusNode.dispose();
-    coletaDropdownModel1.dispose();
-    coletaDropdownModel2.dispose();
-    coletaDropdownModel3.dispose();
-    coletaDropdownModel4.dispose();
-    coletaDropdownModel5.dispose();
-    coletaDropdownModel6.dispose();
-    coletaDropdownModel7.dispose();
+    dropdownFiltroColetaModel1.dispose();
+    dropdownFiltroColetaModel2.dispose();
+    dropdownFiltroColetaModel3.dispose();
+    dropdownFiltroColetaModel4.dispose();
+    dropdownFiltroColetaModel5.dispose();
+    dropdownFiltroColetaModel6.dispose();
+    dropdownFiltroColetaModel7.dispose();
   }
 
   /// Action blocks are added here.

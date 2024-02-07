@@ -1,9 +1,8 @@
-import '/backend/supabase/supabase.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -102,6 +101,7 @@ class _JsonCheckerWidgetState extends State<JsonCheckerWidget> {
                 decoration: BoxDecoration(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                       'Empreendimento',
@@ -113,14 +113,17 @@ class _JsonCheckerWidgetState extends State<JsonCheckerWidget> {
                       children: [
                         Container(
                           width: MediaQuery.sizeOf(context).width * 0.5,
-                          height: 100.0,
+                          constraints: BoxConstraints(
+                            minHeight: 100.0,
+                            maxHeight: 500.0,
+                          ),
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
                           child: Builder(
                             builder: (context) {
-                              final empreendimentoKeys = functions
+                              final empr1keylist = functions
                                       .getKeysFromJSON(FFAppState()
                                           .empreendimentoAtual
                                           .toMap())
@@ -128,15 +131,15 @@ class _JsonCheckerWidgetState extends State<JsonCheckerWidget> {
                                   [];
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
+                                shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                itemCount: empreendimentoKeys.length,
-                                itemBuilder:
-                                    (context, empreendimentoKeysIndex) {
-                                  final empreendimentoKeysItem =
-                                      empreendimentoKeys[
-                                          empreendimentoKeysIndex];
+                                itemCount: empr1keylist.length,
+                                itemBuilder: (context, empr1keylistIndex) {
+                                  final empr1keylistItem =
+                                      empr1keylist[empr1keylistIndex];
                                   return Text(
-                                    empreendimentoKeysItem,
+                                    empr1keylistItem,
+                                    textAlign: TextAlign.end,
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
                                   );
@@ -147,14 +150,17 @@ class _JsonCheckerWidgetState extends State<JsonCheckerWidget> {
                         ),
                         Container(
                           width: MediaQuery.sizeOf(context).width * 0.5,
-                          height: 100.0,
+                          constraints: BoxConstraints(
+                            minHeight: 100.0,
+                            maxHeight: 500.0,
+                          ),
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
-                          child: FutureBuilder<List<EmpreendimentoRow>>(
-                            future: EmpreendimentoTable().querySingleRow(
-                              queryFn: (q) => q,
+                          child: FutureBuilder<ApiCallResponse>(
+                            future: SupabaseCheckGroup.getCheckCall.call(
+                              table: 'empreendimento',
                             ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
@@ -171,128 +177,31 @@ class _JsonCheckerWidgetState extends State<JsonCheckerWidget> {
                                   ),
                                 );
                               }
-                              List<EmpreendimentoRow>
-                                  listViewEmpreendimentoRowList =
-                                  snapshot.data!;
-                              final listViewEmpreendimentoRow =
-                                  listViewEmpreendimentoRowList.isNotEmpty
-                                      ? listViewEmpreendimentoRowList.first
-                                      : null;
+                              final listViewGetCheckResponse = snapshot.data!;
                               return Builder(
                                 builder: (context) {
-                                  final empreendimentoKeys = functions
-                                          .getKeysFromJSON(FFAppState()
-                                              .empreendimentoAtual
-                                              .toMap())
+                                  final empr2keylist = functions
+                                          .getKeysFromJSON(SupabaseCheckGroup
+                                              .getCheckCall
+                                              .firstItem(
+                                            listViewGetCheckResponse.jsonBody,
+                                          ))
                                           ?.toList() ??
                                       [];
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
-                                    itemCount: empreendimentoKeys.length,
-                                    itemBuilder:
-                                        (context, empreendimentoKeysIndex) {
-                                      final empreendimentoKeysItem =
-                                          empreendimentoKeys[
-                                              empreendimentoKeysIndex];
+                                    itemCount: empr2keylist.length,
+                                    itemBuilder: (context, empr2keylistIndex) {
+                                      final empr2keylistItem =
+                                          empr2keylist[empr2keylistIndex];
                                       return Text(
-                                        empreendimentoKeysItem,
+                                        empr2keylistItem,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       );
                                     },
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'Consultoria',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                    ),
-                    Text(
-                      'Consultoria',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * 0.5,
-                          height: 100.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Builder(
-                            builder: (context) {
-                              final empreendimentoKeys = functions
-                                      .getKeysFromJSON(ClienteStruct
-                                          .maybeFromMap(<String, dynamic>{
-                                        '1': '',
-                                      })?.toMap())
-                                      ?.toList() ??
-                                  [];
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                scrollDirection: Axis.vertical,
-                                itemCount: empreendimentoKeys.length,
-                                itemBuilder:
-                                    (context, empreendimentoKeysIndex) {
-                                  final empreendimentoKeysItem =
-                                      empreendimentoKeys[
-                                          empreendimentoKeysIndex];
-                                  return Text(
-                                    empreendimentoKeysItem,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * 0.5,
-                          height: 100.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Builder(
-                            builder: (context) {
-                              final empreendimentoKeys = functions
-                                      .getKeysFromJSON(FFAppState()
-                                          .empreendimentoAtual
-                                          .toMap())
-                                      ?.toList() ??
-                                  [];
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                scrollDirection: Axis.vertical,
-                                itemCount: empreendimentoKeys.length,
-                                itemBuilder:
-                                    (context, empreendimentoKeysIndex) {
-                                  final empreendimentoKeysItem =
-                                      empreendimentoKeys[
-                                          empreendimentoKeysIndex];
-                                  return Text(
-                                    empreendimentoKeysItem,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
                                   );
                                 },
                               );

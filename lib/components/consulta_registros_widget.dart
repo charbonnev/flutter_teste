@@ -147,8 +147,15 @@ class _ConsultaRegistrosWidgetState extends State<ConsultaRegistrosWidget> {
                                           .primaryBackground,
                                       size: 24.0,
                                     ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
+                                    onPressed: () async {
+                                      setState(() {
+                                        FFAppState().RegistroSelecionado =
+                                            RegistroStruct.maybeFromMap(_model
+                                                .registroSelecionado!
+                                                .toMap())!;
+                                      });
+
+                                      context.pushNamed('criarRegistro');
                                     },
                                   ),
                                 ),

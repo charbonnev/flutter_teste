@@ -679,6 +679,97 @@ class GetNomeTipoOcorrenciaCall {
 
 /// End Supabase Group Code
 
+/// Start Supabase Check Group Code
+
+class SupabaseCheckGroup {
+  static String baseUrl = 'https://fzrioxbttmhqlubvmasn.supabase.co/rest/v1/';
+  static Map<String, String> headers = {
+    'apikey':
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6cmlveGJ0dG1ocWx1YnZtYXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc0NzQ3NDUsImV4cCI6MjAxMzA1MDc0NX0.Q9m49Kike55AIZg_uqxB07BC2RE1Yh8Z0GGEs0-nNRo',
+    'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6cmlveGJ0dG1ocWx1YnZtYXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc0NzQ3NDUsImV4cCI6MjAxMzA1MDc0NX0.Q9m49Kike55AIZg_uqxB07BC2RE1Yh8Z0GGEs0-nNRo',
+  };
+  static GetCheckCall getCheckCall = GetCheckCall();
+  static GetPreviousCheckCall getPreviousCheckCall = GetPreviousCheckCall();
+}
+
+class GetCheckCall {
+  Future<ApiCallResponse> call({
+    String? table = 'users',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Check',
+      apiUrl: '${SupabaseCheckGroup.baseUrl}${table}',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6cmlveGJ0dG1ocWx1YnZtYXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc0NzQ3NDUsImV4cCI6MjAxMzA1MDc0NX0.Q9m49Kike55AIZg_uqxB07BC2RE1Yh8Z0GGEs0-nNRo',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6cmlveGJ0dG1ocWx1YnZtYXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc0NzQ3NDUsImV4cCI6MjAxMzA1MDc0NX0.Q9m49Kike55AIZg_uqxB07BC2RE1Yh8Z0GGEs0-nNRo',
+      },
+      params: {
+        'select': "*",
+        'limit': 1,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? arrayBody(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+        true,
+      ) as List?;
+  dynamic? firstItem(dynamic response) => getJsonField(
+        response,
+        r'''$[0]''',
+      );
+}
+
+class GetPreviousCheckCall {
+  Future<ApiCallResponse> call({
+    String? table = 'users',
+    String? version = '001',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Previous Check',
+      apiUrl:
+          '${SupabaseCheckGroup.baseUrl}api_db?version=${version}&select=${table}',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6cmlveGJ0dG1ocWx1YnZtYXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc0NzQ3NDUsImV4cCI6MjAxMzA1MDc0NX0.Q9m49Kike55AIZg_uqxB07BC2RE1Yh8Z0GGEs0-nNRo',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6cmlveGJ0dG1ocWx1YnZtYXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc0NzQ3NDUsImV4cCI6MjAxMzA1MDc0NX0.Q9m49Kike55AIZg_uqxB07BC2RE1Yh8Z0GGEs0-nNRo',
+      },
+      params: {
+        'limit': 1,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? arrayBody(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+        true,
+      ) as List?;
+  dynamic? firstItem(dynamic response) => getJsonField(
+        response,
+        r'''$[0]''',
+      );
+}
+
+/// End Supabase Check Group Code
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

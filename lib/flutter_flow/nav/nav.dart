@@ -107,14 +107,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'criarRegistro',
           path: '/criarRegistro',
-          builder: (context, params) => CriarRegistroWidget(
-            registro: params.getParam('registro', ParamType.JSON),
-          ),
+          builder: (context, params) => CriarRegistroWidget(),
         ),
         FFRoute(
           name: 'JsonChecker',
           path: '/jsonChecker',
           builder: (context, params) => JsonCheckerWidget(),
+        ),
+        FFRoute(
+          name: 'testeWrap',
+          path: '/testeWrap',
+          builder: (context, params) => TesteWrapWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

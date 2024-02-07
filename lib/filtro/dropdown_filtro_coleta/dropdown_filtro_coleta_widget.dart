@@ -1,4 +1,4 @@
-import '/components/bottom_sheet_selector_widget.dart';
+import '/filtro/bottom_sheet_selector/bottom_sheet_selector_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'coleta_dropdown_model.dart';
-export 'coleta_dropdown_model.dart';
+import 'dropdown_filtro_coleta_model.dart';
+export 'dropdown_filtro_coleta_model.dart';
 
-class ColetaDropdownWidget extends StatefulWidget {
-  const ColetaDropdownWidget({
+class DropdownFiltroColetaWidget extends StatefulWidget {
+  const DropdownFiltroColetaWidget({
     super.key,
     required this.tabela,
     required this.nomeExibicao,
@@ -19,7 +19,9 @@ class ColetaDropdownWidget extends StatefulWidget {
     String? campoNome,
     required this.campoID,
     this.choiceChipsList,
-  }) : this.campoNome = campoNome ?? 'nome';
+    String? actionSwitch,
+  })  : this.campoNome = campoNome ?? 'nome',
+        this.actionSwitch = actionSwitch ?? 'filtro';
 
   final String? tabela;
   final String? nomeExibicao;
@@ -27,13 +29,16 @@ class ColetaDropdownWidget extends StatefulWidget {
   final String campoNome;
   final String? campoID;
   final List<String>? choiceChipsList;
+  final String actionSwitch;
 
   @override
-  State<ColetaDropdownWidget> createState() => _ColetaDropdownWidgetState();
+  State<DropdownFiltroColetaWidget> createState() =>
+      _DropdownFiltroColetaWidgetState();
 }
 
-class _ColetaDropdownWidgetState extends State<ColetaDropdownWidget> {
-  late ColetaDropdownModel _model;
+class _DropdownFiltroColetaWidgetState
+    extends State<DropdownFiltroColetaWidget> {
+  late DropdownFiltroColetaModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -44,7 +49,7 @@ class _ColetaDropdownWidgetState extends State<ColetaDropdownWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ColetaDropdownModel());
+    _model = createModel(context, () => DropdownFiltroColetaModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -134,42 +139,50 @@ class _ColetaDropdownWidgetState extends State<ColetaDropdownWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              valueOrDefault<String>(
-                                widget.nomeExibicao,
-                                'null',
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  4.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  widget.nomeExibicao,
+                                  'null',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .labelSmall
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      fontSize: 9.0,
+                                    ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .labelSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: 9.0,
-                                  ),
                             ),
                             Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(),
-                                child: AutoSizeText(
-                                  valueOrDefault<String>(
-                                    functions.returnValueFromObject(
-                                        functions.returnJsonFromObject(
-                                            FFAppState().escolhasFiltros,
-                                            widget.tabela),
-                                        widget.campoNome),
-                                    'Toque para escolher',
-                                  ).maybeHandleOverflow(
-                                    maxChars: 60,
-                                    replacement: '…',
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    4.0, 0.0, 0.0, 0.0),
+                                child: Container(
+                                  decoration: BoxDecoration(),
+                                  child: AutoSizeText(
+                                    valueOrDefault<String>(
+                                      functions.returnStringFromObject(
+                                          functions.returnJsonFromObject(
+                                              FFAppState().escolhasFiltros,
+                                              widget.tabela),
+                                          widget.campoNome),
+                                      'Toque para escolher',
+                                    ).maybeHandleOverflow(
+                                      maxChars: 60,
+                                      replacement: '…',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.normal,
+                                          lineHeight: 1.0,
+                                        ),
+                                    minFontSize: 8.0,
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.normal,
-                                        lineHeight: 1.0,
-                                      ),
-                                  minFontSize: 8.0,
                                 ),
                               ),
                             ),

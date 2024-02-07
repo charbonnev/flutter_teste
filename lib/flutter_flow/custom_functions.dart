@@ -13,7 +13,7 @@ import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
 import '/auth/supabase_auth/auth_util.dart';
 
-String? returnValueFromObject(
+String? returnStringFromObject(
   dynamic object,
   String? key,
 ) {
@@ -38,6 +38,19 @@ dynamic removeKeyJSON(
   return json;
 }
 
+dynamic addKeyValueInt(
+  dynamic json,
+  String key,
+  int? value,
+) {
+  // Adds the Key Value pair to the JSON, returns the modified JSON
+  if (json == null) {
+    json = {};
+  }
+  json[key] = value;
+  return json;
+}
+
 dynamic addKeyJSON(
   dynamic json,
   String key,
@@ -51,7 +64,7 @@ dynamic addKeyJSON(
   return json;
 }
 
-dynamic addKeyValue(
+dynamic addKeyValueStr(
   dynamic json,
   String key,
   String? value,
@@ -131,8 +144,39 @@ List<String>? getKeysFromJSON(dynamic json) {
   return json.keys.toList();
 }
 
+int? returnIntFromObject(
+  dynamic object,
+  String? key,
+) {
+  // Receives a JSON and a key returns the JSON[key] value as string
+  if (object == null || key == null) {
+    return null;
+  }
+  final Map<String, dynamic> json = jsonDecode(jsonEncode(object));
+  return json[key]?.toInt();
+}
+
 DateTime? iSO8601toDatetime(String? iSO8601String) {
   // Gets ISO 8601 formatted string and returns DateTime
   if (iSO8601String == null) return null;
   return DateTime.parse(iSO8601String);
+}
+
+List<dynamic>? searchJSONListforKeyValue(
+  List<dynamic>? jsonList,
+  String key,
+  String value,
+) {
+  // returns JSONs in jsonList where key 'key' is 'value'. Does string comparissons.
+  if (jsonList == null) return null;
+
+  final List<dynamic> results = [];
+
+  for (final json in jsonList) {
+    if (json is Map && json[key].toString() == value) {
+      results.add(json);
+    }
+  }
+
+  return results.isEmpty ? null : results;
 }

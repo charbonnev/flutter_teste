@@ -19,6 +19,7 @@ class EmpreendimentoStruct extends BaseStruct {
     String? nomeNivel2,
     String? nomeNivel3,
     String? nomeNivel4,
+    int? cliente,
   })  : _id = id,
         _nome = nome,
         _logo = logo,
@@ -29,7 +30,8 @@ class EmpreendimentoStruct extends BaseStruct {
         _nomeNivel1 = nomeNivel1,
         _nomeNivel2 = nomeNivel2,
         _nomeNivel3 = nomeNivel3,
-        _nomeNivel4 = nomeNivel4;
+        _nomeNivel4 = nomeNivel4,
+        _cliente = cliente;
 
   // "id" field.
   int? _id;
@@ -99,6 +101,13 @@ class EmpreendimentoStruct extends BaseStruct {
   set nomeNivel4(String? val) => _nomeNivel4 = val;
   bool hasNomeNivel4() => _nomeNivel4 != null;
 
+  // "cliente" field.
+  int? _cliente;
+  int get cliente => _cliente ?? 0;
+  set cliente(int? val) => _cliente = val;
+  void incrementCliente(int amount) => _cliente = cliente + amount;
+  bool hasCliente() => _cliente != null;
+
   static EmpreendimentoStruct fromMap(Map<String, dynamic> data) =>
       EmpreendimentoStruct(
         id: castToType<int>(data['id']),
@@ -112,6 +121,7 @@ class EmpreendimentoStruct extends BaseStruct {
         nomeNivel2: data['nome_nivel2'] as String?,
         nomeNivel3: data['nome_nivel3'] as String?,
         nomeNivel4: data['nome_nivel4'] as String?,
+        cliente: castToType<int>(data['cliente']),
       );
 
   static EmpreendimentoStruct? maybeFromMap(dynamic data) => data is Map
@@ -130,6 +140,7 @@ class EmpreendimentoStruct extends BaseStruct {
         'nome_nivel2': _nomeNivel2,
         'nome_nivel3': _nomeNivel3,
         'nome_nivel4': _nomeNivel4,
+        'cliente': _cliente,
       }.withoutNulls;
 
   @override
@@ -177,6 +188,10 @@ class EmpreendimentoStruct extends BaseStruct {
         'nome_nivel4': serializeParam(
           _nomeNivel4,
           ParamType.String,
+        ),
+        'cliente': serializeParam(
+          _cliente,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -237,6 +252,11 @@ class EmpreendimentoStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        cliente: deserializeParam(
+          data['cliente'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -255,7 +275,8 @@ class EmpreendimentoStruct extends BaseStruct {
         nomeNivel1 == other.nomeNivel1 &&
         nomeNivel2 == other.nomeNivel2 &&
         nomeNivel3 == other.nomeNivel3 &&
-        nomeNivel4 == other.nomeNivel4;
+        nomeNivel4 == other.nomeNivel4 &&
+        cliente == other.cliente;
   }
 
   @override
@@ -270,7 +291,8 @@ class EmpreendimentoStruct extends BaseStruct {
         nomeNivel1,
         nomeNivel2,
         nomeNivel3,
-        nomeNivel4
+        nomeNivel4,
+        cliente
       ]);
 }
 
@@ -286,6 +308,7 @@ EmpreendimentoStruct createEmpreendimentoStruct({
   String? nomeNivel2,
   String? nomeNivel3,
   String? nomeNivel4,
+  int? cliente,
 }) =>
     EmpreendimentoStruct(
       id: id,
@@ -299,4 +322,5 @@ EmpreendimentoStruct createEmpreendimentoStruct({
       nomeNivel2: nomeNivel2,
       nomeNivel3: nomeNivel3,
       nomeNivel4: nomeNivel4,
+      cliente: cliente,
     );

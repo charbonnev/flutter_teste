@@ -688,7 +688,10 @@ class FFAppState extends ChangeNotifier {
         _areasVistoriadas.map((x) => x.serialize()).toList());
   }
 
-  List<NivelStruct> _niveis = [];
+  List<NivelStruct> _niveis = [
+    NivelStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"0\",\"created_at\":\"Hello World\",\"cliente\":\"0\",\"numero_nivel\":\"0\",\"alias_nivel\":\"Hello World\",\"nivel_pai\":\"0\",\"descricao_nivel\":\"Hello World\",\"full_alias\":\"Hello World\",\"consultoria\":\"0\",\"is_deletable\":\"false\",\"shape_file\":\"Hello World\",\"is_record_container\":\"false\"}'))
+  ];
   List<NivelStruct> get niveis => _niveis;
   set niveis(List<NivelStruct> _value) {
     _niveis = _value;
@@ -965,6 +968,16 @@ class FFAppState extends ChangeNotifier {
     updateFn(_RegistroSelecionado);
     secureStorage.setString(
         'ff_RegistroSelecionado', _RegistroSelecionado.serialize());
+  }
+
+  RegistroStruct _registroEmEdicaoApp = RegistroStruct();
+  RegistroStruct get registroEmEdicaoApp => _registroEmEdicaoApp;
+  set registroEmEdicaoApp(RegistroStruct _value) {
+    _registroEmEdicaoApp = _value;
+  }
+
+  void updateRegistroEmEdicaoAppStruct(Function(RegistroStruct) updateFn) {
+    updateFn(_registroEmEdicaoApp);
   }
 }
 

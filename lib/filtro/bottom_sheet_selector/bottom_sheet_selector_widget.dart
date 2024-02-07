@@ -17,15 +17,18 @@ class BottomSheetSelectorWidget extends StatefulWidget {
     String? campoNome,
     String? campoID,
     required this.tabela,
+    String? eventSwitch,
   })  : this.nomeCampo = nomeCampo ?? 'Escolha o valor do campo',
         this.campoNome = campoNome ?? 'nome',
-        this.campoID = campoID ?? 'id';
+        this.campoID = campoID ?? 'id',
+        this.eventSwitch = eventSwitch ?? 'filtro';
 
   final String nomeCampo;
   final List<dynamic>? listaAExibir;
   final String campoNome;
   final String campoID;
   final String? tabela;
+  final String eventSwitch;
 
   @override
   State<BottomSheetSelectorWidget> createState() =>
@@ -167,14 +170,20 @@ class _BottomSheetSelectorWidgetState extends State<BottomSheetSelectorWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                setState(() {
-                                  FFAppState().escolhasFiltros =
-                                      functions.addKeyJSON(
-                                          FFAppState().escolhasFiltros,
-                                          widget.tabela!,
-                                          listaItem);
-                                });
-                                Navigator.pop(context);
+                                if (widget.eventSwitch == 'filtro') {
+                                  setState(() {
+                                    FFAppState().escolhasFiltros =
+                                        functions.addKeyJSON(
+                                            FFAppState().escolhasFiltros,
+                                            widget.tabela!,
+                                            listaItem);
+                                  });
+                                  Navigator.pop(context);
+                                } else if (widget.eventSwitch ==
+                                    'criaRegistro') {
+                                  setState(() {});
+                                  Navigator.pop(context);
+                                }
                               },
                               child: Container(
                                 width: double.infinity,
@@ -201,7 +210,7 @@ class _BottomSheetSelectorWidgetState extends State<BottomSheetSelectorWidget> {
                                           decoration: BoxDecoration(),
                                           child: AutoSizeText(
                                             valueOrDefault<String>(
-                                              functions.returnValueFromObject(
+                                              functions.returnStringFromObject(
                                                   listaItem, widget.campoNome),
                                               'null',
                                             ).maybeHandleOverflow(

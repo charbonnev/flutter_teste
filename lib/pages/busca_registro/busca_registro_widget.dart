@@ -1,7 +1,7 @@
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/coleta_dropdown_widget.dart';
 import '/components/consulta_registros_widget.dart';
+import '/filtro/dropdown_filtro_coleta/dropdown_filtro_coleta_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -345,7 +345,7 @@ class _BuscaRegistroWidgetState extends State<BuscaRegistroWidget>
                             ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 0.0, 8.0, 8.0),
+                                  0.0, 0.0, 0.0, 8.0),
                               child: Wrap(
                                 spacing: 0.0,
                                 runSpacing: 10.0,
@@ -361,9 +361,9 @@ class _BuscaRegistroWidgetState extends State<BuscaRegistroWidget>
                                         MediaQuery.sizeOf(context).width * 0.43,
                                     decoration: BoxDecoration(),
                                     child: wrapWithModel(
-                                      model: _model.coletaDropdownModel1,
+                                      model: _model.dropdownFiltroColetaModel1,
                                       updateCallback: () => setState(() {}),
-                                      child: ColetaDropdownWidget(
+                                      child: DropdownFiltroColetaWidget(
                                         tabela: 'tipo_ocorrencia',
                                         nomeExibicao: 'Tipo Ocorrência',
                                         campoNome: 'nome_tipo_ocorrencia',
@@ -382,9 +382,9 @@ class _BuscaRegistroWidgetState extends State<BuscaRegistroWidget>
                                         MediaQuery.sizeOf(context).width * 0.43,
                                     decoration: BoxDecoration(),
                                     child: wrapWithModel(
-                                      model: _model.coletaDropdownModel2,
+                                      model: _model.dropdownFiltroColetaModel2,
                                       updateCallback: () => setState(() {}),
-                                      child: ColetaDropdownWidget(
+                                      child: DropdownFiltroColetaWidget(
                                         tabela: 'area_vistoriada',
                                         nomeExibicao: 'Area Vistoriada',
                                         campoNome: 'nome_area_vistoriada',
@@ -403,9 +403,9 @@ class _BuscaRegistroWidgetState extends State<BuscaRegistroWidget>
                                         MediaQuery.sizeOf(context).width * 0.43,
                                     decoration: BoxDecoration(),
                                     child: wrapWithModel(
-                                      model: _model.coletaDropdownModel3,
+                                      model: _model.dropdownFiltroColetaModel3,
                                       updateCallback: () => setState(() {}),
-                                      child: ColetaDropdownWidget(
+                                      child: DropdownFiltroColetaWidget(
                                         tabela: 'programa',
                                         nomeExibicao: 'Programa',
                                         campoNome: 'nome_programa',
@@ -424,9 +424,9 @@ class _BuscaRegistroWidgetState extends State<BuscaRegistroWidget>
                                         MediaQuery.sizeOf(context).width * 0.43,
                                     decoration: BoxDecoration(),
                                     child: wrapWithModel(
-                                      model: _model.coletaDropdownModel4,
+                                      model: _model.dropdownFiltroColetaModel4,
                                       updateCallback: () => setState(() {}),
-                                      child: ColetaDropdownWidget(
+                                      child: DropdownFiltroColetaWidget(
                                         tabela: 'tema',
                                         nomeExibicao: 'Tema',
                                         campoNome: 'nome_tema',
@@ -445,9 +445,9 @@ class _BuscaRegistroWidgetState extends State<BuscaRegistroWidget>
                                         MediaQuery.sizeOf(context).width * 0.43,
                                     decoration: BoxDecoration(),
                                     child: wrapWithModel(
-                                      model: _model.coletaDropdownModel5,
+                                      model: _model.dropdownFiltroColetaModel5,
                                       updateCallback: () => setState(() {}),
-                                      child: ColetaDropdownWidget(
+                                      child: DropdownFiltroColetaWidget(
                                         tabela: 'responsavel_acao',
                                         nomeExibicao: 'Responsável Ação',
                                         campoNome: 'nome_responsavel',
@@ -466,9 +466,9 @@ class _BuscaRegistroWidgetState extends State<BuscaRegistroWidget>
                                         MediaQuery.sizeOf(context).width * 0.43,
                                     decoration: BoxDecoration(),
                                     child: wrapWithModel(
-                                      model: _model.coletaDropdownModel6,
+                                      model: _model.dropdownFiltroColetaModel6,
                                       updateCallback: () => setState(() {}),
-                                      child: ColetaDropdownWidget(
+                                      child: DropdownFiltroColetaWidget(
                                         tabela: 'nivel',
                                         nomeExibicao: 'Nível',
                                         campoNome: 'full_alias',
@@ -487,9 +487,9 @@ class _BuscaRegistroWidgetState extends State<BuscaRegistroWidget>
                                         MediaQuery.sizeOf(context).width * 0.43,
                                     decoration: BoxDecoration(),
                                     child: wrapWithModel(
-                                      model: _model.coletaDropdownModel7,
+                                      model: _model.dropdownFiltroColetaModel7,
                                       updateCallback: () => setState(() {}),
-                                      child: ColetaDropdownWidget(
+                                      child: DropdownFiltroColetaWidget(
                                         tabela: 'status_acao',
                                         nomeExibicao: 'Status da Ação',
                                         campoNome: 'nome_status_acao',

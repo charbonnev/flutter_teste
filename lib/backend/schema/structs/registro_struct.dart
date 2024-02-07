@@ -24,19 +24,20 @@ class RegistroStruct extends BaseStruct {
     String? requisitoLegal,
     String? acaoRecomendada,
     String? prazo,
-    EnumStatusAcao? statusAcao,
+    EnumStatusAcao? enumStatusAcao,
+    int? statusAcao,
     String? descricaoAcaoRealizada,
     List<String>? fotosAcao,
     List<String>? videosAcao,
     String? dataAcao,
     DateTime? dataAcao2,
     int? programa,
+    int? responsavelAcao,
     int? cliente,
     String? responsavel,
     EnumCondicaoClima? noiteAnterior,
     EnumCondicaoClima? manha,
     EnumCondicaoClima? tarde,
-    int? responsavelAcao,
     int? nivel,
     String? createdBy,
     String? updatedBy,
@@ -65,6 +66,7 @@ class RegistroStruct extends BaseStruct {
         _requisitoLegal = requisitoLegal,
         _acaoRecomendada = acaoRecomendada,
         _prazo = prazo,
+        _enumStatusAcao = enumStatusAcao,
         _statusAcao = statusAcao,
         _descricaoAcaoRealizada = descricaoAcaoRealizada,
         _fotosAcao = fotosAcao,
@@ -72,12 +74,12 @@ class RegistroStruct extends BaseStruct {
         _dataAcao = dataAcao,
         _dataAcao2 = dataAcao2,
         _programa = programa,
+        _responsavelAcao = responsavelAcao,
         _cliente = cliente,
         _responsavel = responsavel,
         _noiteAnterior = noiteAnterior,
         _manha = manha,
         _tarde = tarde,
-        _responsavelAcao = responsavelAcao,
         _nivel = nivel,
         _createdBy = createdBy,
         _updatedBy = updatedBy,
@@ -193,10 +195,18 @@ class RegistroStruct extends BaseStruct {
   set prazo(String? val) => _prazo = val;
   bool hasPrazo() => _prazo != null;
 
+  // "enum_status_acao" field.
+  EnumStatusAcao? _enumStatusAcao;
+  EnumStatusAcao get enumStatusAcao =>
+      _enumStatusAcao ?? EnumStatusAcao.NaoIniciado;
+  set enumStatusAcao(EnumStatusAcao? val) => _enumStatusAcao = val;
+  bool hasEnumStatusAcao() => _enumStatusAcao != null;
+
   // "status_acao" field.
-  EnumStatusAcao? _statusAcao;
-  EnumStatusAcao get statusAcao => _statusAcao ?? EnumStatusAcao.NaoIniciado;
-  set statusAcao(EnumStatusAcao? val) => _statusAcao = val;
+  int? _statusAcao;
+  int get statusAcao => _statusAcao ?? 0;
+  set statusAcao(int? val) => _statusAcao = val;
+  void incrementStatusAcao(int amount) => _statusAcao = statusAcao + amount;
   bool hasStatusAcao() => _statusAcao != null;
 
   // "descricao_acao_realizada" field.
@@ -240,6 +250,14 @@ class RegistroStruct extends BaseStruct {
   void incrementPrograma(int amount) => _programa = programa + amount;
   bool hasPrograma() => _programa != null;
 
+  // "responsavel_acao" field.
+  int? _responsavelAcao;
+  int get responsavelAcao => _responsavelAcao ?? 0;
+  set responsavelAcao(int? val) => _responsavelAcao = val;
+  void incrementResponsavelAcao(int amount) =>
+      _responsavelAcao = responsavelAcao + amount;
+  bool hasResponsavelAcao() => _responsavelAcao != null;
+
   // "cliente" field.
   int? _cliente;
   int get cliente => _cliente ?? 0;
@@ -271,14 +289,6 @@ class RegistroStruct extends BaseStruct {
   EnumCondicaoClima get tarde => _tarde ?? EnumCondicaoClima.Nublado;
   set tarde(EnumCondicaoClima? val) => _tarde = val;
   bool hasTarde() => _tarde != null;
-
-  // "responsavel_acao" field.
-  int? _responsavelAcao;
-  int get responsavelAcao => _responsavelAcao ?? 0;
-  set responsavelAcao(int? val) => _responsavelAcao = val;
-  void incrementResponsavelAcao(int amount) =>
-      _responsavelAcao = responsavelAcao + amount;
-  bool hasResponsavelAcao() => _responsavelAcao != null;
 
   // "nivel" field.
   int? _nivel;
@@ -383,20 +393,22 @@ class RegistroStruct extends BaseStruct {
         requisitoLegal: data['requisito_legal'] as String?,
         acaoRecomendada: data['acao_recomendada'] as String?,
         prazo: data['prazo'] as String?,
-        statusAcao: deserializeEnum<EnumStatusAcao>(data['status_acao']),
+        enumStatusAcao:
+            deserializeEnum<EnumStatusAcao>(data['enum_status_acao']),
+        statusAcao: castToType<int>(data['status_acao']),
         descricaoAcaoRealizada: data['descricao_acao_realizada'] as String?,
         fotosAcao: getDataList(data['fotos_acao']),
         videosAcao: getDataList(data['videos_acao']),
         dataAcao: data['data_acao'] as String?,
         dataAcao2: data['data_acao2'] as DateTime?,
         programa: castToType<int>(data['programa']),
+        responsavelAcao: castToType<int>(data['responsavel_acao']),
         cliente: castToType<int>(data['cliente']),
         responsavel: data['responsavel'] as String?,
         noiteAnterior:
             deserializeEnum<EnumCondicaoClima>(data['noite_anterior']),
         manha: deserializeEnum<EnumCondicaoClima>(data['manha']),
         tarde: deserializeEnum<EnumCondicaoClima>(data['tarde']),
-        responsavelAcao: castToType<int>(data['responsavel_acao']),
         nivel: castToType<int>(data['nivel']),
         createdBy: data['created_by'] as String?,
         updatedBy: data['updated_by'] as String?,
@@ -431,19 +443,20 @@ class RegistroStruct extends BaseStruct {
         'requisito_legal': _requisitoLegal,
         'acao_recomendada': _acaoRecomendada,
         'prazo': _prazo,
-        'status_acao': _statusAcao?.serialize(),
+        'enum_status_acao': _enumStatusAcao?.serialize(),
+        'status_acao': _statusAcao,
         'descricao_acao_realizada': _descricaoAcaoRealizada,
         'fotos_acao': _fotosAcao,
         'videos_acao': _videosAcao,
         'data_acao': _dataAcao,
         'data_acao2': _dataAcao2,
         'programa': _programa,
+        'responsavel_acao': _responsavelAcao,
         'cliente': _cliente,
         'responsavel': _responsavel,
         'noite_anterior': _noiteAnterior?.serialize(),
         'manha': _manha?.serialize(),
         'tarde': _tarde?.serialize(),
-        'responsavel_acao': _responsavelAcao,
         'nivel': _nivel,
         'created_by': _createdBy,
         'updated_by': _updatedBy,
@@ -524,9 +537,13 @@ class RegistroStruct extends BaseStruct {
           _prazo,
           ParamType.String,
         ),
+        'enum_status_acao': serializeParam(
+          _enumStatusAcao,
+          ParamType.Enum,
+        ),
         'status_acao': serializeParam(
           _statusAcao,
-          ParamType.Enum,
+          ParamType.int,
         ),
         'descricao_acao_realizada': serializeParam(
           _descricaoAcaoRealizada,
@@ -554,6 +571,10 @@ class RegistroStruct extends BaseStruct {
           _programa,
           ParamType.int,
         ),
+        'responsavel_acao': serializeParam(
+          _responsavelAcao,
+          ParamType.int,
+        ),
         'cliente': serializeParam(
           _cliente,
           ParamType.int,
@@ -573,10 +594,6 @@ class RegistroStruct extends BaseStruct {
         'tarde': serializeParam(
           _tarde,
           ParamType.Enum,
-        ),
-        'responsavel_acao': serializeParam(
-          _responsavelAcao,
-          ParamType.int,
         ),
         'nivel': serializeParam(
           _nivel,
@@ -712,9 +729,14 @@ class RegistroStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        statusAcao: deserializeParam<EnumStatusAcao>(
-          data['status_acao'],
+        enumStatusAcao: deserializeParam<EnumStatusAcao>(
+          data['enum_status_acao'],
           ParamType.Enum,
+          false,
+        ),
+        statusAcao: deserializeParam(
+          data['status_acao'],
+          ParamType.int,
           false,
         ),
         descricaoAcaoRealizada: deserializeParam(
@@ -747,6 +769,11 @@ class RegistroStruct extends BaseStruct {
           ParamType.int,
           false,
         ),
+        responsavelAcao: deserializeParam(
+          data['responsavel_acao'],
+          ParamType.int,
+          false,
+        ),
         cliente: deserializeParam(
           data['cliente'],
           ParamType.int,
@@ -770,11 +797,6 @@ class RegistroStruct extends BaseStruct {
         tarde: deserializeParam<EnumCondicaoClima>(
           data['tarde'],
           ParamType.Enum,
-          false,
-        ),
-        responsavelAcao: deserializeParam(
-          data['responsavel_acao'],
-          ParamType.int,
           false,
         ),
         nivel: deserializeParam(
@@ -862,6 +884,7 @@ class RegistroStruct extends BaseStruct {
         requisitoLegal == other.requisitoLegal &&
         acaoRecomendada == other.acaoRecomendada &&
         prazo == other.prazo &&
+        enumStatusAcao == other.enumStatusAcao &&
         statusAcao == other.statusAcao &&
         descricaoAcaoRealizada == other.descricaoAcaoRealizada &&
         listEquality.equals(fotosAcao, other.fotosAcao) &&
@@ -869,12 +892,12 @@ class RegistroStruct extends BaseStruct {
         dataAcao == other.dataAcao &&
         dataAcao2 == other.dataAcao2 &&
         programa == other.programa &&
+        responsavelAcao == other.responsavelAcao &&
         cliente == other.cliente &&
         responsavel == other.responsavel &&
         noiteAnterior == other.noiteAnterior &&
         manha == other.manha &&
         tarde == other.tarde &&
-        responsavelAcao == other.responsavelAcao &&
         nivel == other.nivel &&
         createdBy == other.createdBy &&
         updatedBy == other.updatedBy &&
@@ -907,6 +930,7 @@ class RegistroStruct extends BaseStruct {
         requisitoLegal,
         acaoRecomendada,
         prazo,
+        enumStatusAcao,
         statusAcao,
         descricaoAcaoRealizada,
         fotosAcao,
@@ -914,12 +938,12 @@ class RegistroStruct extends BaseStruct {
         dataAcao,
         dataAcao2,
         programa,
+        responsavelAcao,
         cliente,
         responsavel,
         noiteAnterior,
         manha,
         tarde,
-        responsavelAcao,
         nivel,
         createdBy,
         updatedBy,
@@ -952,17 +976,18 @@ RegistroStruct createRegistroStruct({
   String? requisitoLegal,
   String? acaoRecomendada,
   String? prazo,
-  EnumStatusAcao? statusAcao,
+  EnumStatusAcao? enumStatusAcao,
+  int? statusAcao,
   String? descricaoAcaoRealizada,
   String? dataAcao,
   DateTime? dataAcao2,
   int? programa,
+  int? responsavelAcao,
   int? cliente,
   String? responsavel,
   EnumCondicaoClima? noiteAnterior,
   EnumCondicaoClima? manha,
   EnumCondicaoClima? tarde,
-  int? responsavelAcao,
   int? nivel,
   String? createdBy,
   String? updatedBy,
@@ -991,17 +1016,18 @@ RegistroStruct createRegistroStruct({
       requisitoLegal: requisitoLegal,
       acaoRecomendada: acaoRecomendada,
       prazo: prazo,
+      enumStatusAcao: enumStatusAcao,
       statusAcao: statusAcao,
       descricaoAcaoRealizada: descricaoAcaoRealizada,
       dataAcao: dataAcao,
       dataAcao2: dataAcao2,
       programa: programa,
+      responsavelAcao: responsavelAcao,
       cliente: cliente,
       responsavel: responsavel,
       noiteAnterior: noiteAnterior,
       manha: manha,
       tarde: tarde,
-      responsavelAcao: responsavelAcao,
       nivel: nivel,
       createdBy: createdBy,
       updatedBy: updatedBy,
